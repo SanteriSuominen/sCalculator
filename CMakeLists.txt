@@ -32,7 +32,7 @@ file(GLOB_RECURSE SRC
  #      CHANGE THIS TO YOUR PROJECT NAME ALSO IN TASK.json
  #               lllllllllllllllll
  #               vvvvvvvvvvvvvvvvv
-set(TARGET_NAME "Your_Project_Name")
+set(TARGET_NAME "sCalculator")
 
 # ADD NEW TARGET, TARGETS ARE .exe, .dll or .lib FILES FOR EXAMPLE, ON WINDOWS
 add_executable(${TARGET_NAME} ${SRC})

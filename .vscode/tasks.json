@@ -64,7 +64,7 @@
             //                                                                             CHANGE THIS TO YOUR PROJECT NAME ALSO IN CMAKE
             //                                                                                       lllllllllllllllll
             //                                                                                       vvvvvvvvvvvvvvvvv
-            "command": "cmake --build build --target all --config Debug && bash -c ./build/bin/Debug/Your_Project_Name",
+            "command": "cmake --build build --target all --config Debug && bash -c ./build/bin/Debug/sCalculator",
             "problemMatcher": [],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -85,7 +85,7 @@
             //                                                                           CHANGE THIS TO YOUR PROJECT NAME ALSO IN CMAKE
             //                                                                                           lllllllllllllllll
             //                                                                                           vvvvvvvvvvvvvvvvv
-            "command": "cmake --build build --target all --config Release && bash -c ./build/bin/Release/Your_Project_Name",
+            "command": "cmake --build build --target all --config Release && bash -c ./build/bin/Release/sCalculator",
             "problemMatcher": [],
             "options": {
                 "cwd": "${workspaceFolder}"

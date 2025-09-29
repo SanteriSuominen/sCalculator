@@ -1,12 +1,26 @@
 #include <iostream>
+#include <string>
+
+void Header();
 
 int main()
 {
-    // Test if your code Build&Runs from task runner press "Make" first!
-    int x, y;
-    x = 1;
-    y = 2;
+   Header();
+}
 
-    std::cout << "x = " << x << ", y = " << y << ", x + y = " << (x + y) << std::endl;   
-    // You can also just build and run it form exmpl: ubuntu terminal just with "./"
+void Header()
+{
+    std::string statusBar = "calc";
+    std::string input = "";
+    std::cout << "Welcome to sCalculator! \n\n This is no default calulator, it is meant for more complex calculations \n And predetirmend operations." << std::endl;
+    std::cout << "Type (help) for additional information" << std::endl;
+
+    while(true)
+    {
+        std::cout << statusBar + ": ";
+        std::cin >> input;
+        statusBar = statusBar + "/" + input;
+    }
+
+
 }
