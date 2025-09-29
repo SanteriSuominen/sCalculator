@@ -1,0 +1,103 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {   
+            "label": "Make",
+            "type": "shell",
+            //"command": "cmake -G 'Ninja Multi-Config' -D CMAKE_C_COMPILER=clang -D CMAKE_CXX_COMPILER=clang++ -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=1; [ -f build/compile_commands.json ] && cp build_dir/compile_commands.json .",
+            "command": "cmake -G 'Ninja Multi-Config' -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=1",
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+            "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+            "reveal": "always",
+            "panel": "shared"
+            }
+        },
+
+        {   
+            "label": "build-Debug",
+            "type": "shell",
+            "command": "cmake --build build --target all --config Debug",
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+            "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+            "reveal": "always",
+            "panel": "shared"
+            }
+        },
+
+        {   
+            "label": "Build-Release",
+            "type": "shell",
+            "command": "cmake --build build --target all --config Release",
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+            "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+            "reveal": "always",
+            "panel": "shared"
+            }
+        },
+
+         {   
+            "label": "Build&Run-Debug",
+            "type": "shell",
+            //                                                                             CHANGE THIS TO YOUR PROJECT NAME ALSO IN CMAKE
+            //                                                                                       lllllllllllllllll
+            //                                                                                       vvvvvvvvvvvvvvvvv
+            "command": "cmake --build build --target all --config Debug && bash -c ./build/bin/Debug/Your_Project_Name",
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+            "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+            "reveal": "always",
+            "panel": "shared"
+            }
+        },
+
+        {   
+            "label": "Build&Run-Release",
+            "type": "shell",
+            //                                                                           CHANGE THIS TO YOUR PROJECT NAME ALSO IN CMAKE
+            //                                                                                           lllllllllllllllll
+            //                                                                                           vvvvvvvvvvvvvvvvv
+            "command": "cmake --build build --target all --config Release && bash -c ./build/bin/Release/Your_Project_Name",
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+            "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+            "reveal": "always",
+            "panel": "shared"
+            }
+        },
+    ]
+}
