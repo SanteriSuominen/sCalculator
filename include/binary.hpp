@@ -7,6 +7,7 @@ class binary {
         binary();
         ~binary();
         void NumToBin(int);
+        void BinToNum(std::string);
     
     private:
         std::vector<int> HasValidFours(std::vector<int>);

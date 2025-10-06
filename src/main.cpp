@@ -6,14 +6,19 @@ void Header();
 
 int main()
 {
-    int num = 0;
-    binary obj; 
-    while(true)
-    {   std::cout << "give num: ";
-        std::cin >> num;
-        obj.NumToBin(num);
-    }
-   return 0;
+//     int num = 0;
+     binary obj; 
+//     while(true)
+//     {   std::cout << "give num: ";
+//         std::cin >> num;
+//         obj.NumToBin(num);
+//     }
+//    return 0;
+
+    std::string input = "";
+    std::getline(std::cin, input);
+    obj.BinToNum(input);
+
 }
 
 void Header()

@@ -78,3 +78,82 @@ void binary::PrintBinayVector(std::vector<int> bin, int originalNumber)// tulost
 
     std::cout << std::endl;
 }
+
+void binary::BinToNum(std::string binary)
+{
+    std::vector<int> digits;
+
+    for(char character : binary)
+    {
+        if(character == '1' || character == '0' || character == ' ')
+        {
+            if(isdigit(character))
+                digits.insert(digits.begin(), character - '0');
+        }
+
+        else
+        {
+            std::cout << "Convertion failed! Given input contained values that are other than 1 or 0";
+            return;
+        }
+    }
+
+    if (digits.size() > 31 && digits.size < 64)
+    {
+        std::cout << "WARNING the binary input you provided is larger than 32 bits and will result to extremely large decimal value:" << std::endl;
+        std::cout << "Do you wish to continue using 64 bit format allowing possibility of larger decimal values: (Y/n)";
+        
+        if(std::cin = Y)
+        {
+             long int factor = 1;
+             long int total = 0;
+
+            for(int value : digits)
+            {
+                if(value == 1)
+                {
+                    total += factor;
+                }
+                factor *= 2;
+            }
+        }
+    }
+
+    else
+    {
+
+        // tee eri integer koille omat aliohjelmat
+
+    }
+    int factor = 1;
+    int total = 0;
+
+    for(int value : digits)
+    {
+        if(value == 1)
+        {
+            total += factor;
+        }
+        factor *= 2;
+    }
+
+    std::cout << "Your binary value: " ;
+
+    int index = 0;
+
+    for(char c : binary)
+    {
+        std::cout << c;
+        
+        if(index == 9)
+        {
+            std::cout << ".. .";
+            break;
+        }
+
+        if(c != ' ')
+            index++;
+    }
+
+    std::cout << " = " << total << " as decimal value.";    
+}
