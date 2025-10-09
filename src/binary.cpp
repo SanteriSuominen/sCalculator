@@ -81,6 +81,23 @@ void binary::PrintBinayVector(std::vector<int> bin, int originalNumber)// tulost
 
 void binary::BinToNum(std::string binary)
 {
+    long int factor = 1;
+    long int total = 0;
+
+    for(int value : ConvertStringToIntVector(binary))
+    {
+        if(value == 1)
+        {
+            total += factor;
+        }
+        factor *= 2;
+    }
+   
+    PrintDecimalValue(binary, total);
+}
+
+std::vector<int> binary::ConvertStringToIntVector(std::string binary)
+{
     std::vector<int> digits;
 
     for(char character : binary)
@@ -94,49 +111,20 @@ void binary::BinToNum(std::string binary)
         else
         {
             std::cout << "Convertion failed! Given input contained values that are other than 1 or 0";
-            return;
+            return {2};
         }
     }
 
-    if (digits.size() > 31 && digits.size < 64)
+    if (digits.size() > 63)
     {
-        std::cout << "WARNING the binary input you provided is larger than 32 bits and will result to extremely large decimal value:" << std::endl;
-        std::cout << "Do you wish to continue using 64 bit format allowing possibility of larger decimal values: (Y/n)";
-        
-        if(std::cin = Y)
-        {
-             long int factor = 1;
-             long int total = 0;
-
-            for(int value : digits)
-            {
-                if(value == 1)
-                {
-                    total += factor;
-                }
-                factor *= 2;
-            }
-        }
+        std::cout <<"WARNING Your binary code is larger than 63 bits and is not supported by sCalculator. " << std::endl;  
+        return {2};
     }
+    return digits;
+}
 
-    else
-    {
-
-        // tee eri integer koille omat aliohjelmat
-
-    }
-    int factor = 1;
-    int total = 0;
-
-    for(int value : digits)
-    {
-        if(value == 1)
-        {
-            total += factor;
-        }
-        factor *= 2;
-    }
-
+void binary::PrintDecimalValue(std::string binary, long int decimalValue)
+{
     std::cout << "Your binary value: " ;
 
     int index = 0;
@@ -155,5 +143,6 @@ void binary::BinToNum(std::string binary)
             index++;
     }
 
-    std::cout << " = " << total << " as decimal value.";    
+    std::cout << " = " << decimalValue << " as decimal value.";
+    return;
 }
