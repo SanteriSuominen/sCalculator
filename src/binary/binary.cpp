@@ -1,17 +1,28 @@
-#include "../include/binary.hpp"
+#include "../include/binary/binary.hpp"
+#include <cstdint>
+#include <iostream>
 
-binary::binary(){
+binary::binary(int64_t value)
+{
+    NumToBin(value);
+}
 
+binary::binary(std::string value)
+{
+    BinToNum(value);
 }
 
 binary::~binary(){
 
 }
 
-void binary::NumToBin(int num) //Muunnetaan integer binääri lukuun (Vectori siältäen 1 ja 0)
+void binary::NumToBin(int64_t num) //Muunnetaan integer binääri lukuun (Vectori siältäen 1 ja 0)
 {
     std::vector<int> bin;
-    int numToBin = num;
+    int64_t numToBin = num;
+
+    if(numToBin < 0)
+        numToBin = numToBin * -1;
 
     while(numToBin >= 2) 
     {  
@@ -35,8 +46,7 @@ void binary::NumToBin(int num) //Muunnetaan integer binääri lukuun (Vectori si
     PrintBinayVector(bin, num);
 }
 
-
-std::vector<int> binary::HasValidFours(std::vector<int> bin) //Tarkistetaan että tulostamme 10 järjestelmä luvut tasan neljän pariessa 1111 0110 .. .
+std::vector<int> binary::HasValidFours(std::vector<int> bin) //Tarkistetaan että tulostamme 10 järjestelmä luvut tasan neljän pariessa 0011 0110 .. .
 {
     int index = 0;
 
@@ -63,6 +73,9 @@ void binary::PrintBinayVector(std::vector<int> bin, int originalNumber)// tulost
 {
     std::cout << "Number: " << originalNumber << " toBin = ";
 
+    if (originalNumber < 0)
+        std::cout << "-";
+
     int x = 0;
 
     for(int i = 0; i < bin.size(); i++)
@@ -75,14 +88,12 @@ void binary::PrintBinayVector(std::vector<int> bin, int originalNumber)// tulost
         std::cout << bin[i];
         x++;
     } 
-
-    std::cout << std::endl;
 }
 
 void binary::BinToNum(std::string binary)
 {
-    long int factor = 1;
-    long int total = 0;
+    int64_t factor = 1;
+    int64_t total = 0;
 
     for(int value : ConvertStringToIntVector(binary))
     {
@@ -123,9 +134,9 @@ std::vector<int> binary::ConvertStringToIntVector(std::string binary)
     return digits;
 }
 
-void binary::PrintDecimalValue(std::string binary, long int decimalValue)
+void binary::PrintDecimalValue(std::string binary, int64_t decimalValue)
 {
-    std::cout << "Your binary value: " ;
+    std::cout << " Your binary value: " ;
 
     int index = 0;
 

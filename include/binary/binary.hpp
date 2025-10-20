@@ -1,17 +1,20 @@
 #pragma once
-#include <iostream>
+#include <string>
 #include <vector>
+#include <cstdint>
+
 
 class binary {
     public:
-        binary();
+        binary(int64_t value);
+        binary(std::string value);
         ~binary();
-        void NumToBin(int);
+        void NumToBin(int64_t);
         void BinToNum(std::string);
 
     private:
         std::vector<int> HasValidFours(std::vector<int>);
         void PrintBinayVector(std::vector<int>, int);
-        void PrintDecimalValue(std::string, long int);
+        void PrintDecimalValue(std::string, int64_t);
         std::vector<int> ConvertStringToIntVector(std::string);
 };  
