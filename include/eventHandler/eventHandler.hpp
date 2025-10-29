@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <cstdint>
+#include <map>
+#include <functional>
 
 class eventHandler{
     public:
@@ -10,7 +12,6 @@ class eventHandler{
         std::string input = " ";
         std::string segmentIdentifier = "sCalculator: ";
 
-        void PrintLogo();
         void ProgramManager();
         std::string InputString(std::string &input);
         bool InputInt(int64_t &input);
