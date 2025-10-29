@@ -6,8 +6,7 @@
 
 class binary {
     public:
-        binary(int64_t value);
-        binary(std::string value);
+        binary(std::string command, std::string value);
         ~binary();
         void NumToBin(int64_t);
         void BinToNum(std::string);

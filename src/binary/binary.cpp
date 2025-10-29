@@ -1,20 +1,27 @@
 #include "../include/binary/binary.hpp"
 #include <cstdint>
 #include <iostream>
+#include <string>
 
-binary::binary(int64_t value)
+binary::binary(std::string command, std::string value)
 {
-    NumToBin(value);
+    if(command == "NumToBin")
+    {
+       NumToBin(std::stoi(value));
+    }
+
+    else if(command == "BinToNum")
+    {
+        BinToNum(value);
+    }
+
+    else
+    {
+        std::cout << "ERROR: Task didn't match any of the exiting tasks in binary." << std::endl;
+    }
 }
 
-binary::binary(std::string value)
-{
-    BinToNum(value);
-}
-
-binary::~binary(){
-
-}
+binary::~binary(){}
 
 void binary::NumToBin(int64_t num) //Muunnetaan integer binääri lukuun (Vectori siältäen 1 ja 0)
 {
