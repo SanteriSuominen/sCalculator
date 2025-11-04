@@ -8,6 +8,7 @@ class eventHandler{
     public:
         eventHandler();
         ~eventHandler();
+        std::string ErrorManager(int);
     private:
         std::string input = " ";
         std::string segmentIdentifier = "sCalculator: ";
@@ -15,5 +16,5 @@ class eventHandler{
         void ProgramManager();
         std::string InputString(std::string &input);
         bool InputInt(int64_t &input);
-        void clearConsole();
+        void ClearConsole();
 };

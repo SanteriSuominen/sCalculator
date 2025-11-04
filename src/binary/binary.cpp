@@ -1,4 +1,5 @@
 #include "../include/binary/binary.hpp"
+#include "../include/eventHandler/eventHandler.hpp"
 #include <cstdint>
 #include <iostream>
 #include <string>
@@ -7,18 +8,21 @@ binary::binary(std::string command, std::string value)
 {
     if(command == "NumToBin")
     {
-       NumToBin(std::stoi(value));
+        for(char character : value)
+        {
+            if(!isdigit(character))
+            {
+                eventHandler::ErrorManager(3);
+            }
+        }
+        NumToBin(std::stoi(value));
     }
 
     else if(command == "BinToNum")
-    {
         BinToNum(value);
-    }
 
     else
-    {
-        std::cout << "ERROR: Task didn't match any of the exiting tasks in binary." << std::endl;
-    }
+        std::cout << ErrorManager(2);
 }
 
 binary::~binary(){}

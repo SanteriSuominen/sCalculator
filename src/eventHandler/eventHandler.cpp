@@ -26,8 +26,8 @@ void eventHandler::ProgramManager()
 
     InputString(input);
 
-    for(char character : input)
-    {
+    for(char character : input) // original input is segmented as 3 strings that form a list
+    {                           // the values represent type, commmand, value
         if(character == '/')
             i++;
 
@@ -49,7 +49,7 @@ void eventHandler::ProgramManager()
      it->second();
 
     else
-        std::cout << "manager doesn't match any known tasks!\n"; 
+       std::cout << ErrorManager(1);
 
 }
 
@@ -72,7 +72,25 @@ bool eventHandler::InputInt(int64_t &input)
     return true;
 }
 
-void eventHandler::clearConsole() 
+void eventHandler::ClearConsole() 
 {
     std::cout << "\033[2J\033[H" << std::flush;
+}
+
+std::string eventHandler::ErrorManager(int code)
+{
+    switch(code)
+    {
+        case 1:
+            return "ERROR: Unknown type given! -> type <-/command/value";
+
+         case 2:
+            return "ERROR: Unknown command given! type/-> command <-/value";
+
+         case 3:
+            return "ERROR: Given value dosen't match type or command! type/command/-> value <-";
+
+         case 4:
+            return "";
+    }
 }
