@@ -5,7 +5,7 @@
 #include <string>
 
 
-eventHandler::eventHandler()
+eventHandler::eventHandler() // start the program
 {
     ProgramManager();
 }
@@ -18,48 +18,52 @@ eventHandler::~eventHandler()
 
 void eventHandler::ProgramManager()
 {
+    while(true)
+    {                               
+        std::string input = "";     // Input gets seperated to 3 part command type/command/value
+        std::string command[3] = {""};
+        int i = 0;
 
-    std::string input = "";
-    std::string command[3] = {""};
+        std::cout << segmentIdentifier;
 
-    int i = 0;
+        InputString(input);
+        
+        if(input == "exit") // Exit if exit
+            return;
 
-    InputString(input);
+        for(char character : input) // Original input is segmented as 3 strings that form a list
+        {                           // The values represent type, commmand, value
+            if(character == '/')
+                i++;
 
-    for(char character : input) // original input is segmented as 3 strings that form a list
-    {                           // the values represent type, commmand, value
-        if(character == '/')
-            i++;
+            else
+                command[i] += character;
+        }
+        
+        std::map<std::string, std::function<void()>> manager; // Map to handle type and give tasks forward to each type
+
+        manager["binary"] = [command](){binary bin(command[1], command[2]);};
+        manager["hexadecimal"] = []() {    std::cout << "Kone käynnistyy...\n"; };
+        manager["matrix"] = []() {         std::cout << "Kone käynnistyy...\n"; };
+        manager["vectors"] = []() {        std::cout << "Kone käynnistyy...\n"; };
+
+        auto it = manager.find(command[0]);
+
+        if (it != manager.end()) 
+            it->second();
 
         else
-            command[i] += character;
+            std::cout << ErrorManager(1);
     }
-    
-    std::map<std::string, std::function<void()>> manager;
-
-    manager["binary"] = [command](){binary bin(command[1], command[2]);};
-
-    manager["hexadecimal"] = []() {    std::cout << "Kone käynnistyy...\n"; };
-    manager["matrix"] = []() {         std::cout << "Kone käynnistyy...\n"; };
-    manager["vectors"] = []() {        std::cout << "Kone käynnistyy...\n"; };
-    manager["vectors"] = []() {        std::cout << "Kone käynnistyy...\n"; };
-
-    auto it = manager.find(command[0]);
-    if (it != manager.end()) 
-     it->second();
-
-    else
-       std::cout << ErrorManager(1);
-
 }
 
-std::string eventHandler::InputString(std::string &input)
+std::string eventHandler::InputString(std::string &input) // Handle string input
 {
     std::getline(std::cin, input);
     return input;
 }
 
-bool eventHandler::InputInt(int64_t &input)
+bool eventHandler::InputInt(int64_t &input) // Handle int input
 { 
     if(!(std::cin >> input))
     {
@@ -72,25 +76,27 @@ bool eventHandler::InputInt(int64_t &input)
     return true;
 }
 
-void eventHandler::ClearConsole() 
+void eventHandler::ClearConsole() // duh
 {
     std::cout << "\033[2J\033[H" << std::flush;
 }
 
-std::string eventHandler::ErrorManager(int code)
+std::string eventHandler::ErrorManager(int code) // Return error string by int code
 {
     switch(code)
-    {
+    { 
         case 1:
-            return "ERROR: Unknown type given! -> type <-/command/value";
+            return "\nERROR: Unknown type given! -> type <-/command/value\n\n";
 
          case 2:
-            return "ERROR: Unknown command given! type/-> command <-/value";
+            return "\nERROR: Unknown command given! type/-> command <-/value\n\n";
 
          case 3:
-            return "ERROR: Given value dosen't match type or command! type/command/-> value <-";
+            return "\nERROR: Given value dosen't match type or command! type/command/-> value <-\n\n";
 
          case 4:
+            return "\nERROR: Your binary code is larger than 63 bits and is not supported by sCalculator.\n\n";
+        default:
             return "";
     }
 }

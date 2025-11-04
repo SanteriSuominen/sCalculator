@@ -2,5 +2,6 @@
 int main()
 {
     eventHandler program;
+    return 0;
 }
 

@@ -5,15 +5,14 @@
 #include "../include/eventHandler/eventHandler.hpp"
 
 
-
 class binary {
     public:
         binary(std::string command, std::string value);
         ~binary();
-        void NumToBin(int64_t);
-        void BinToNum(std::string);
 
     private:
+        void NumToBin(int64_t);
+        void BinToNum(std::string);
         std::vector<int> HasValidFours(std::vector<int>);
         void PrintBinayVector(std::vector<int>, int);
         void PrintDecimalValue(std::string, int64_t);

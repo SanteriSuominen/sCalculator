@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 
-binary::binary(std::string command, std::string value)
+binary::binary(std::string command, std::string value) // Forward command to corresponding function
 {
     if(command == "NumToBin")
     {
@@ -12,7 +12,7 @@ binary::binary(std::string command, std::string value)
         {
             if(!isdigit(character))
             {
-                eventHandler::ErrorManager(3);
+               std::cout << eventHandler::ErrorManager(3); return;
             }
         }
         NumToBin(std::stoi(value));
@@ -22,12 +22,14 @@ binary::binary(std::string command, std::string value)
         BinToNum(value);
 
     else
-        std::cout << ErrorManager(2);
+    {
+        std::cout << eventHandler::ErrorManager(2); return;
+    }
 }
 
 binary::~binary(){}
 
-void binary::NumToBin(int64_t num) //Muunnetaan integer binääri lukuun (Vectori siältäen 1 ja 0)
+void binary::NumToBin(int64_t num) //Convert decimal value (int) to binary number
 {
     std::vector<int> bin;
     int64_t numToBin = num;
@@ -57,7 +59,7 @@ void binary::NumToBin(int64_t num) //Muunnetaan integer binääri lukuun (Vector
     PrintBinayVector(bin, num);
 }
 
-std::vector<int> binary::HasValidFours(std::vector<int> bin) //Tarkistetaan että tulostamme 10 järjestelmä luvut tasan neljän pariessa 0011 0110 .. .
+std::vector<int> binary::HasValidFours(std::vector<int> bin) // Make sure we have valid four number segments by adding zeros
 {
     int index = 0;
 
@@ -79,7 +81,7 @@ std::vector<int> binary::HasValidFours(std::vector<int> bin) //Tarkistetaan ett�
     return bin;
 }
 
-void binary::PrintBinayVector(std::vector<int> bin, int originalNumber)// tulosta binääri vektori 4 arvon välein 1101 1001 0000 .. .
+void binary::PrintBinayVector(std::vector<int> bin, int originalNumber)// Print binary vector by four bit sections 1001 1010 .. .
 
 {
     std::cout << "Number: " << originalNumber << " toBin = ";
@@ -101,7 +103,7 @@ void binary::PrintBinayVector(std::vector<int> bin, int originalNumber)// tulost
     } 
 }
 
-void binary::BinToNum(std::string binary)
+void binary::BinToNum(std::string binary) // Convert string binary to to decimal
 {
     int64_t factor = 1;
     int64_t total = 0;
@@ -118,7 +120,7 @@ void binary::BinToNum(std::string binary)
     PrintDecimalValue(binary, total);
 }
 
-std::vector<int> binary::ConvertStringToIntVector(std::string binary)
+std::vector<int> binary::ConvertStringToIntVector(std::string binary) // Convert string binary to int type vector of bits
 {
     std::vector<int> digits;
 
@@ -132,20 +134,18 @@ std::vector<int> binary::ConvertStringToIntVector(std::string binary)
 
         else
         {
-            std::cout << "Convertion failed! Given input contained values that are other than 1 or 0";
-            return {2};
+            std::cout << eventHandler::ErrorManager(3); return;
         }
     }
 
     if (digits.size() > 63)
     {
-        std::cout <<"WARNING Your binary code is larger than 63 bits and is not supported by sCalculator. " << std::endl;  
-        return {2};
+        std::cout << eventHandler::ErrorManager(4); return false; //TÄÄLÄ korjaa ehk pointer
     }
     return digits;
 }
 
-void binary::PrintDecimalValue(std::string binary, int64_t decimalValue)
+void binary::PrintDecimalValue(std::string binary, int64_t decimalValue) // Print decimal values
 {
     std::cout << " Your binary value: " ;
 
