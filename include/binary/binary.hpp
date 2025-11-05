@@ -2,8 +2,6 @@
 #include <string>
 #include <vector>
 #include <cstdint>
-#include "../include/eventHandler/eventHandler.hpp"
-
 
 class binary {
     public:
