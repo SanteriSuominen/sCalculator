@@ -17,4 +17,6 @@ class binary {
         void PrintBinayVector(std::vector<int>, int);
         void PrintDecimalValue(std::string, int64_t);
         std::vector<int> ConvertStringToIntVector(std::string);
+        bool ErrorCheckBinaryInput(std::string);
+        bool ErrorCheckDecimalInput(std::string);
 };  

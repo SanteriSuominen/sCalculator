@@ -4,22 +4,23 @@
 #include <iostream>
 #include <string>
 
-binary::binary(std::string command, std::string value) // Forward command to corresponding function
+
+binary::binary(std::string command, std::string input) // Forward command to corresponding function
 {
     if(command == "NumToBin")
     {
-        for(char character : value)
-        {
-            if(!isdigit(character))
-            {
-               std::cout << eventHandler::ErrorManager(3); return;
-            }
-        }
-        NumToBin(std::stoi(value));
+        if(!ErrorCheckDecimalInput(input)) eventHandler::ErrorManager(3); return;
+
+        NumToBin(std::stoi(input));
     }
 
     else if(command == "BinToNum")
-        BinToNum(value);
+    {   
+        if(!ErrorCheckBinaryInput(input)) 
+            eventHandler::ErrorManager(3); return;
+    
+        BinToNum(input);
+    }
 
     else
     {
@@ -126,22 +127,10 @@ std::vector<int> binary::ConvertStringToIntVector(std::string binary) // Convert
 
     for(char character : binary)
     {
-        if(character == '1' || character == '0' || character == ' ')
-        {
-            if(isdigit(character))
-                digits.insert(digits.begin(), character - '0');
-        }
-
-        else
-        {
-            std::cout << eventHandler::ErrorManager(3); return;
-        }
+        if(isdigit(character))
+            digits.insert(digits.begin(), character - '0');
     }
 
-    if (digits.size() > 63)
-    {
-        std::cout << eventHandler::ErrorManager(4); return false; //TÄÄLÄ korjaa ehk pointer
-    }
     return digits;
 }
 
@@ -167,4 +156,28 @@ void binary::PrintDecimalValue(std::string binary, int64_t decimalValue) // Prin
 
     std::cout << " = " << decimalValue << " as decimal value.";
     return;
+}
+
+bool binary::ErrorCheckDecimalInput(std::string input)
+{
+    for(char character : input)
+    {
+        if(!isdigit(character)) return false;
+    }
+    return true;
+}
+
+bool binary::ErrorCheckBinaryInput(std::string input)
+{
+    int count = 0;
+
+    for(char character : input)
+    {
+        if(character != '1' && character != '0' && !character != ' ') return false;
+            
+        if(count > 63) return false;
+
+        count++;
+    }
+    return true;
 }
