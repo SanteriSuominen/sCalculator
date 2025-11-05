@@ -173,7 +173,7 @@ bool binary::ErrorCheckBinaryInput(std::string input)
 
     for(char character : input)
     {
-        if(character != '1' && character != '0' && !character != ' ') return false;
+        if(character != '1' && character != '0' && character != ' ') return false;
             
         if(count > 63) return false;
 
