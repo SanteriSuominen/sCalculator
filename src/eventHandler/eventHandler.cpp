@@ -24,7 +24,7 @@ void eventHandler::ProgramManager()
         std::string command[3] = {""};
         int i = 0;
 
-        std::cout << segmentIdentifier;
+        std::cout << "\n\n" << segmentIdentifier;
 
         InputString(input);
         
@@ -42,10 +42,12 @@ void eventHandler::ProgramManager()
         
         std::map<std::string, std::function<void()>> manager; // Map to handle type and give tasks forward to each type
 
-        manager["binary"] = [command](){binary bin(command[1], command[2]);};
-        manager["hexadecimal"] = []() {    std::cout << "Kone käynnistyy...\n"; };
-        manager["matrix"] = []() {         std::cout << "Kone käynnistyy...\n"; };
-        manager["vectors"] = []() {        std::cout << "Kone käynnistyy...\n"; };
+        manager["binary"]       = [command](){binary bin(command[1], command[2]);};
+        manager["hexadecimal"]  = []() {std::cout << "TBD\n"; };
+        manager["matrix"]       = []() {std::cout << "TBD\n"; };
+        manager["vectors"]      = []() {std::cout << "TBD\n"; };
+        manager["clear"]        = [this]() { this->ClearConsole(); };
+        manager["help"]         = [this]() { this->Help();};
 
         auto it = manager.find(command[0]);
 
@@ -86,17 +88,32 @@ std::string eventHandler::ErrorManager(int code) // Return error string by int c
     switch(code)
     { 
         case 1:
-            return "\nERROR: Unknown type given! -> type <-/command/value\n\n";
+            return "\nERROR: Unknown type given! -> type <-/command/value";
 
          case 2:
-            return "\nERROR: Unknown command given! type/-> command <-/value\n\n";
+            return "\nERROR: Unknown command given! type/-> command <-/value";
 
          case 3:
-            return "\nERROR: Given value dosen't match type or command! type/command/-> value <-\n\n";
+            return "\nERROR: Given value dosen't match type or command! type/command/-> value <-";
 
          case 4:
-            return "\nERROR: Your binary code is larger than 63 bits and is not supported by sCalculator.\n\n";
+            return "\nERROR: Your binary code is larger than 63 bits and is not supported by sCalculator.";
         default:
             return "";
     }
+}
+
+void eventHandler::Help()
+{
+    std::cout << "\nHelp:\n\n";
+    std::cout << "Task format is: type/command/value | exp: binary/NumToBin/255 Press Enter\n\n";
+    std::cout << "Tasks:\n";
+    std::cout << "binary | type: binary | commands: NumToBin & BinToNum |\n"; 
+    std::cout << "  NumToBin value exp: whole numbers like 1234\n"; 
+    std::cout << "  BinToNum value exp: 10011010.. . or 1001 1010.. .\n"; 
+    std::cout << "\nhexadecimal | TBD\n";
+    std::cout << "\nmatrix | TBD\n";
+    std::cout << "\nvector | TBD\n";
+    std::cout << "\nclear | clear screen\n";
+    std::cout << "\nhelp | open help window\n";
 }

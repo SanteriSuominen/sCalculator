@@ -17,5 +17,5 @@ class eventHandler{
         std::string InputString(std::string &input);// Handle string inputs
         bool InputInt(int64_t &input);              // Handle int inputs
         void ClearConsole();                        // Clean console
-        void Help() const;                          // HELP!!
+        void Help();                          // HELP!!
 };

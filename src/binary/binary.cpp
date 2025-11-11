@@ -9,15 +9,22 @@ binary::binary(std::string command, std::string input) // Forward command to cor
 {
     if(command == "NumToBin")
     {
-        if(!ErrorCheckDecimalInput(input)) eventHandler::ErrorManager(3); return;
+        if(!ErrorCheckDecimalInput(input))
+        {
+            std::cout << eventHandler::ErrorManager(3);
+            return;
+        } 
 
         NumToBin(std::stoi(input));
     }
 
     else if(command == "BinToNum")
     {   
-        if(!ErrorCheckBinaryInput(input)) 
-            eventHandler::ErrorManager(3); return;
+        if(!ErrorCheckBinaryInput(input))
+        {
+            std::cout << eventHandler::ErrorManager(3);
+            return;
+        } 
     
         BinToNum(input);
     }
@@ -162,7 +169,8 @@ bool binary::ErrorCheckDecimalInput(std::string input)
 {
     for(char character : input)
     {
-        if(!isdigit(character)) return false;
+        if(!isdigit(character))
+            return false;
     }
     return true;
 }
@@ -173,9 +181,11 @@ bool binary::ErrorCheckBinaryInput(std::string input)
 
     for(char character : input)
     {
-        if(character != '1' && character != '0' && character != ' ') return false;
+        if(character != '1' && character != '0' && character != ' ') 
+            return false;
             
-        if(count > 63) return false;
+        else if(count > 63) 
+            return false;
 
         count++;
     }
