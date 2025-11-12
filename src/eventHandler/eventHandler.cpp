@@ -2,6 +2,7 @@
 #include "../include/binary/binary.hpp"
 #include <limits>
 #include <iostream>
+#include <regex>
 #include <string>
 
 
@@ -43,7 +44,7 @@ void eventHandler::ProgramManager()
         std::map<std::string, std::function<void()>> manager; // Map to handle type and give tasks forward to each type
 
         manager["binary"]       = [command](){binary bin(command[1], command[2]);};
-        manager["hexadecimal"]  = []() {std::cout << "TBD\n"; };
+        manager["hexadecimal"]  = [command]() {std::cout << std::stoi(command[2],nullptr, 16);};
         manager["matrix"]       = []() {std::cout << "TBD\n"; };
         manager["vectors"]      = []() {std::cout << "TBD\n"; };
         manager["clear"]        = [this]() { this->ClearConsole(); };
@@ -108,12 +109,12 @@ void eventHandler::Help()
     std::cout << "\nHelp:\n\n";
     std::cout << "Task format is: type/command/value | exp: binary/NumToBin/255 Press Enter\n\n";
     std::cout << "Tasks:\n";
-    std::cout << "binary | type: binary | commands: NumToBin & BinToNum |\n"; 
-    std::cout << "  NumToBin value exp: whole numbers like 1234\n"; 
-    std::cout << "  BinToNum value exp: 10011010.. . or 1001 1010.. .\n"; 
-    std::cout << "\nhexadecimal | TBD\n";
-    std::cout << "\nmatrix | TBD\n";
-    std::cout << "\nvector | TBD\n";
-    std::cout << "\nclear | clear screen\n";
-    std::cout << "\nhelp | open help window\n";
+    std::cout << "\n-binary      | type: binary | commands: NumToBin & BinToNum |\n"; 
+    std::cout << "  1.NumToBin value exp: whole numbers like 1234\n"; 
+    std::cout << "  2.BinToNum value exp: 10011010.. . or 1001 1010.. .\n"; 
+    std::cout << "\n-hexadecimal | TBD\n";
+    std::cout << "\n-matrix      | TBD\n";
+    std::cout << "\n-vector      | TBD\n";
+    std::cout << "\n-clear       | clear screen\n";
+    std::cout << "\n-help        | open help window\n";
 }

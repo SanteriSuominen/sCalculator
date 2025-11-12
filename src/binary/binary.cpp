@@ -92,7 +92,7 @@ std::vector<int> binary::HasValidFours(std::vector<int> bin) // Make sure we hav
 void binary::PrintBinayVector(std::vector<int> bin, int originalNumber)// Print binary vector by four bit sections 1001 1010 .. .
 
 {
-    std::cout << "Number: " << originalNumber << " toBin = ";
+    std::cout << " Number: " << originalNumber << " toBin = ";
 
     if (originalNumber < 0)
         std::cout << "-";
